@@ -9,6 +9,32 @@ It's very similar to [smcFanControl](https://github.com/hholtmann/smcFanControl)
 
 ---
 
+## Features
+  - in-application commands for quicker access than using a menu
+  - graphical configuration menu
+  - slider for quick RPM control
+  - textfield for even greater RPM precision
+  - menu shortcuts for full and return-to-automatic speeds
+  - keyboard shortcut integration once application is in focus
+
+---
+
+## In-Application Commands
+  - `rpm`: toggle display of rpm in the menubar
+  - `temp`: toggle display of temperature in the menubar
+  - `unit`: toggle between Celsius or Fahrenheit as temperature unit in the menubar
+  - `auto`: return RPM control to your computer
+  - `full`: quick shortcut for full speed ahead
+
+---
+
+## Note
+The application must be run within an AppleScript wrapper that allows it to run with administrator privileges. As of current, this wrapper is not available, but will be added shortly.
+
+<sub>I can't seem to figure out AuthorizationServices</sub>
+
+---
+
 Features that will be added soon (hopefully):
   - [x] runtime configurability for behavior (options)
   - [x] GUI menu for options
