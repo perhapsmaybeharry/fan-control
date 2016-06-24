@@ -94,8 +94,9 @@ class MenuBarPopover: NSViewController {
 		// - quit (self-explanatory)
 		// - rpm (display fan rpm)
 		// - temp (display temperature)
-		// - fah (use fahrenheit)
-		// - cel (use celsius)
+		// - fah (use fahrenheit) [DEPRECATED]
+		// - cel (use celsius) [DEPRECATED]
+		// - unit
 		// - auto (return speed control to automatic)
 		// - full (full speed ahead)
 		if textfield.stringValue == "quit" {commandQuit()}
