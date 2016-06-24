@@ -39,7 +39,7 @@
                 </textField>
                 <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bkq-Jq-t5t">
                     <rect key="frame" x="182" y="3" width="34" height="26"/>
-                    <popUpButtonCell key="cell" type="disclosure" bezelStyle="roundedDisclosure" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" arrowPosition="noArrow" preferredEdge="maxX" autoenablesItems="NO" altersStateOfSelectedItem="NO" id="StS-N4-e7g">
+                    <popUpButtonCell key="cell" type="disclosure" title="Item 1" bezelStyle="roundedDisclosure" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" arrowPosition="noArrow" preferredEdge="maxX" autoenablesItems="NO" altersStateOfSelectedItem="NO" selectedItem="5kh-nk-nk0" id="StS-N4-e7g">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" autoenablesItems="NO" id="dy6-Rc-kk0">

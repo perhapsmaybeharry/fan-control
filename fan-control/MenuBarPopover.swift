@@ -17,6 +17,7 @@ class MenuBarPopover: NSViewController {
 	@IBOutlet var textfield: NSTextField!
 	@IBOutlet var moreOptions: NSButton!
 	
+	let optionsMenu = NSMenu()/*, presetSubMenu = NSMenu()*/
 	override func viewDidAppear() {
 		// update slider min-max values
 		slider.minValue = Double(minSpeed)
@@ -30,19 +31,44 @@ class MenuBarPopover: NSViewController {
 		textfield.stringValue = String(slider.integerValue)
 		
 		// set up moreOptions menu
-		let menu = NSMenu()
-		menu.addItemWithTitle("Display RPM", action: #selector(commandRPM), keyEquivalent: "r")?.state = NSOnState
-		menu.addItemWithTitle("Display Temperature", action: #selector(commandTemp), keyEquivalent: "t")?.state = NSOnState
-		// refresh rate?
-		menu.addItem(NSMenuItem.separatorItem())
-		menu.addItemWithTitle("Use Fahrenheit", action: #selector(commandToggleUnit), keyEquivalent: "u")
-		menu.addItem(NSMenuItem.separatorItem())
-		menu.addItemWithTitle("Auto Speed", action: #selector(commandAutoSpeed), keyEquivalent: "=")
-		menu.addItemWithTitle("Full Speed", action: #selector(commandMaxSpeed), keyEquivalent: "+")
-		menu.addItem(NSMenuItem.separatorItem())
-		menu.addItemWithTitle("Quit", action: #selector(commandQuit), keyEquivalent: "q")
-		moreOptions.menu = menu
+		optionsMenu.removeAllItems()
+		optionsMenu.addItemWithTitle("Display RPM", action: #selector(commandRPM), keyEquivalent: "r")?.state = NSOnState
+		optionsMenu.addItemWithTitle("Display Temperature", action: #selector(commandTemp), keyEquivalent: "t")?.state = NSOnState
+		// allow changing of sensor used for temperature?
+		optionsMenu.addItem(NSMenuItem.separatorItem())
+//		optionsMenu.addItemWithTitle("Presets", action: nil, keyEquivalent: "")
+//		// set up presets submenu
+//		presetSubMenu.removeAllItems()
+//		loadPresets()
+//		presetSubMenu.addItem(NSMenuItem.separatorItem())
+//		presetSubMenu.addItemWithTitle("Save Current Settings", action: #selector(writePreset), keyEquivalent: "")
+//		optionsMenu.setSubmenu(presetSubMenu, forItem: optionsMenu.itemWithTitle("Presets")!)
+//		optionsMenu.addItem(NSMenuItem.separatorItem())
+		optionsMenu.addItemWithTitle("Use Fahrenheit", action: #selector(commandToggleUnit), keyEquivalent: "u")
+		optionsMenu.addItem(NSMenuItem.separatorItem())
+		optionsMenu.addItemWithTitle("Auto Speed", action: #selector(commandAutoSpeed), keyEquivalent: "=")
+		optionsMenu.addItemWithTitle("Full Speed", action: #selector(commandMaxSpeed), keyEquivalent: "+")
+		optionsMenu.addItem(NSMenuItem.separatorItem())
+		optionsMenu.addItemWithTitle("Quit", action: #selector(commandQuit), keyEquivalent: "q")
+		moreOptions.menu = optionsMenu
 	}
+	
+//	// presets...ugh
+//	func loadPresets() {
+//		var presetFile = String(), presets = [String]()
+//		do {presetFile = try String(contentsOfFile: NSBundle.mainBundle().pathForResource("pst", ofType: "")!)} catch let err as NSError {print(err.localizedDescription)}
+//		if !presetFile.containsString("][") {presetSubMenu.addItemWithTitle("No presets", action: nil, keyEquivalent: ""); presetSubMenu.autoenablesItems = false; presetSubMenu.itemWithTitle("No presets")!.enabled = false; return} else {presetSubMenu.removeAllItems()}
+//		presets = presetFile.componentsSeparatedByString("][")
+//		for preset in presets {
+//			presetSubMenu.addItemWithTitle("\(preset) rpm", action: #selector(menuChangeRPMToPreset(_:)), keyEquivalent: "")
+//		}
+//		presetSubMenu.addItem(NSMenuItem.separatorItem())
+//		presetSubMenu.addItemWithTitle("Save Current Settings", action: #selector(writePreset), keyEquivalent: "")
+//	}
+//	func writePreset() {
+//		do {try String("\(userSetSpeed)][").writeToFile("\(NSBundle.mainBundle().resourcePath!)/pst", atomically: false, encoding: NSUTF8StringEncoding)} catch let err as NSError {print(err.localizedDescription)}
+//		loadPresets()
+//	}
 	
 	// Updates the UI
 	@IBAction func sliderDidChange(sender: AnyObject) {
@@ -97,6 +123,7 @@ class MenuBarPopover: NSViewController {
 	func commandToggleUnit() {if celsius {celsius = false; moreOptions.menu?.itemAtIndex(3)?.title = "Use Celsius"} else {celsius = true; moreOptions.menu?.itemAtIndex(3)?.title = "Use Fahrenheit"}; print("unit:          \(celsius ? "celsius" : "fahrenheit")"); commandWasCalled()}
 	func commandAutoSpeed() {slider.doubleValue = slider.minValue; textfield.stringValue = String(slider.integerValue); setTargetFanSpeed(Int(slider.minValue))}
 	func commandMaxSpeed() {slider.doubleValue = slider.maxValue; textfield.stringValue = String(slider.integerValue); setTargetFanSpeed(Int(slider.maxValue))}
+//	func menuChangeRPMToPreset(sender: NSMenuItem) {print(sender.title); setTargetFanSpeed(Int(sender.title)!)}
 	
 	// stupid selectors that don't accept parameters won't let me use this
 //	func commandUnit(unit: String) {celsius = unit == "cel" ? true : false; print("unit:          \(celsius ? "celsius" : "fahrenheit")"); commandWasCalled()}

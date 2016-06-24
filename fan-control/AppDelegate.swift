@@ -13,7 +13,7 @@ let menuBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableS
 let popover = NSPopover()
 var monitorLeftClick: EventMonitor?
 
-var maxSpeed = Int(), minSpeed = Int()
+var maxSpeed = Int(), minSpeed = Int(), refreshRate: NSTimeInterval = 3.0
 var displayTemp = Bool(true), displayRPM = Bool(true), celsius = Bool(true)
 
 @NSApplicationMain
@@ -23,13 +23,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		print("hello world")
 		// Initialise the button in the menubar
 		if let button = menuBarItem.button {
-			//			button.image = NSImage(named: "fan")
+//			button.image = NSImage(named: "fan")
 			button.action = #selector(togglePopover(_:))
 			
 			updateMenubarItem()
 		}
 		// Initialise the timer that updates the menubar every three seconds
-		NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(updateMenubarItem), userInfo: nil, repeats: true)
+		NSTimer.scheduledTimerWithTimeInterval(refreshRate, target: self, selector: #selector(updateMenubarItem), userInfo: nil, repeats: true)
 		
 		// Initialise the NSPopover to use the view controller MenuBarPopover
 		popover.contentViewController = MenuBarPopover(nibName: "MenuBarPopover", bundle: nil)
@@ -60,6 +60,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			SMCKit.close()
 			
 		} catch let err as NSError {print(err.localizedDescription);}
+		
+//		// check for preset file, and if non-existent, create
+//		if !NSFileManager().fileExistsAtPath("\(NSBundle.mainBundle().resourcePath)/pst") {do {try String().writeToFile("\(NSBundle.mainBundle().resourcePath!)/pst", atomically: false, encoding: NSUTF8StringEncoding)} catch let err as NSError {print("\n\(err.localizedDescription)")}}
+		
 		print()
 	}
 	

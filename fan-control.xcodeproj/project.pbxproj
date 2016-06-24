@@ -266,13 +266,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/fan-control/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LLVM_LTO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thisbetterwork.fan-control";
 				PRODUCT_NAME = "fan-control";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -288,13 +288,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/fan-control/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LLVM_LTO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thisbetterwork.fan-control";
 				PRODUCT_NAME = "fan-control";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
 		};
