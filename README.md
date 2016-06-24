@@ -20,6 +20,7 @@ It's very similar to [smcFanControl](https://github.com/hholtmann/smcFanControl)
 ---
 
 ## In-Application Commands
+Enter a command into the textfield for it to take effect. Most of these commands now have graphical counterparts found in the menu.
   - `rpm`: toggle display of rpm in the menubar
   - `temp`: toggle display of temperature in the menubar
   - `unit`: toggle between Celsius or Fahrenheit as temperature unit in the menubar
