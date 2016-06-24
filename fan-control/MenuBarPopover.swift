@@ -37,7 +37,7 @@ class MenuBarPopover: NSViewController {
 		menu.addItem(NSMenuItem.separatorItem())
 		menu.addItemWithTitle("Use Fahrenheit", action: #selector(commandToggleUnit), keyEquivalent: "u")
 		menu.addItem(NSMenuItem.separatorItem())
-		menu.addItemWithTitle("Auto Speed", action: #selector(commandResetSpeed), keyEquivalent: "=")
+		menu.addItemWithTitle("Auto Speed", action: #selector(commandAutoSpeed), keyEquivalent: "=")
 		menu.addItemWithTitle("Full Speed", action: #selector(commandMaxSpeed), keyEquivalent: "+")
 		menu.addItem(NSMenuItem.separatorItem())
 		menu.addItemWithTitle("Quit", action: #selector(commandQuit), keyEquivalent: "q")
@@ -70,13 +70,18 @@ class MenuBarPopover: NSViewController {
 		// - temp (display temperature)
 		// - fah (use fahrenheit)
 		// - cel (use celsius)
+		// - auto (return speed control to automatic)
+		// - full (full speed ahead)
 		if textfield.stringValue == "quit" {commandQuit()}
-		else if textfield.stringValue == "rpm" {commandRPM(); return}
-		else if textfield.stringValue == "temp" {commandTemp(); return}
-		else if textfield.stringValue == /*"fah"*/ "unit" {commandToggleUnit(); return}
+		else if textfield.stringValue == "rpm" {commandRPM()}
+		else if textfield.stringValue == "temp" {commandTemp()}
+		else if textfield.stringValue == /*"fah"*/ "unit" {commandToggleUnit()}
 //		else if textfield.stringValue == "cel" {commandToggleUnit(); return}
+		else if textfield.stringValue == "auto" {commandAutoSpeed()}
+		else if textfield.stringValue == "full" {commandMaxSpeed()}
 		
-		if slider.stringValue.rangeOfCharacterFromSet(NSCharacterSet.decimalDigitCharacterSet()) == nil {
+		// if the textfield does not contain numbers, do not interpret as fan speed (to allow for incomplete commands)
+		if textfield.stringValue.rangeOfCharacterFromSet(NSCharacterSet.decimalDigitCharacterSet()) != nil {
 			slider.integerValue = textfield.integerValue
 			setTargetFanSpeed(slider.integerValue)
 		}
@@ -90,7 +95,7 @@ class MenuBarPopover: NSViewController {
 //	func commandCelsius() {celsius = true; print("unit:          celsius"); moreOptions.menu?.itemAtIndex(3)?.state = celsius ? NSOnState : NSOffState; commandWasCalled()}
 //	func commandFahrenheit() {celsius = false; print("unit:          fahrenheit"); moreOptions.menu?.itemAtIndex(4)?.state = celsius ? NSOffState : NSOnState; commandWasCalled()}
 	func commandToggleUnit() {if celsius {celsius = false; moreOptions.menu?.itemAtIndex(3)?.title = "Use Celsius"} else {celsius = true; moreOptions.menu?.itemAtIndex(3)?.title = "Use Fahrenheit"}; print("unit:          \(celsius ? "celsius" : "fahrenheit")"); commandWasCalled()}
-	func commandResetSpeed() {slider.doubleValue = slider.minValue; textfield.stringValue = String(slider.integerValue); setTargetFanSpeed(Int(slider.minValue))}
+	func commandAutoSpeed() {slider.doubleValue = slider.minValue; textfield.stringValue = String(slider.integerValue); setTargetFanSpeed(Int(slider.minValue))}
 	func commandMaxSpeed() {slider.doubleValue = slider.maxValue; textfield.stringValue = String(slider.integerValue); setTargetFanSpeed(Int(slider.maxValue))}
 	
 	// stupid selectors that don't accept parameters won't let me use this
