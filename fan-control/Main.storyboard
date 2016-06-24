@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F24b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+    </dependencies>
+    <scenes>
+        <!--Application-->
+        <scene sceneID="JPo-4y-FX3">
+            <objects>
+                <application id="hnw-xV-0zn" sceneMemberID="viewController">
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
+                        <items>
+                            <menuItem title="fan-control" id="1Xt-HY-uBw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="fan-control" systemMenu="apple" id="uQy-DD-JDr">
+                                    <items>
+                                        <menuItem title="Select All" keyEquivalent="a" id="HLL-DU-t4j">
+                                            <connections>
+                                                <action selector="selectAll:" target="Ady-hI-5gd" id="Wzs-wX-E9l"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Undo" keyEquivalent="z" id="jVa-PS-pVn">
+                                            <connections>
+                                                <action selector="undo:" target="Ady-hI-5gd" id="6Kx-Zx-qM4"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Copy" keyEquivalent="c" id="j5u-Wg-XXV">
+                                            <connections>
+                                                <action selector="copy:" target="Ady-hI-5gd" id="6Iv-Ac-g0g"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Cut" keyEquivalent="x" id="mA4-u7-CD8">
+                                            <connections>
+                                                <action selector="cut:" target="Ady-hI-5gd" id="YrW-RF-bDX"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Paste" keyEquivalent="v" id="Z5T-hS-tcR">
+                                            <connections>
+                                                <action selector="paste:" target="Ady-hI-5gd" id="WJ8-LV-ae2"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                    </connections>
+                </application>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="fan_control" customModuleProvider="target"/>
+                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="0.0"/>
+        </scene>
+    </scenes>
+</document>

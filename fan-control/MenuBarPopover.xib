@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F24b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MenuBarPopover" customModule="fan_control" customModuleProvider="target">
+            <connections>
+                <outlet property="moreOptions" destination="bkq-Jq-t5t" id="zPm-9d-ceB"/>
+                <outlet property="slider" destination="LXE-Ng-lyx" id="VvA-QK-ilS"/>
+                <outlet property="textfield" destination="tlv-Aq-3Mh" id="3Dh-bi-Y5g"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="218" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <slider focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LXE-Ng-lyx">
+                    <rect key="frame" x="6" y="6" width="124" height="20"/>
+                    <sliderCell key="cell" continuous="YES" state="on" focusRingType="none" alignment="left" minValue="1" maxValue="10240" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="aa5-FV-BcZ"/>
+                    <connections>
+                        <action selector="sliderDidChange:" target="-2" id="8Qe-Nc-42Y"/>
+                    </connections>
+                </slider>
+                <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tlv-Aq-3Mh">
+                    <rect key="frame" x="136" y="5" width="45" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" drawsBackground="YES" id="tX3-3U-HwQ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="textfieldDidFinishEditing:" target="-2" id="g39-Jk-L1O"/>
+                    </connections>
+                </textField>
+                <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bkq-Jq-t5t">
+                    <rect key="frame" x="182" y="3" width="34" height="26"/>
+                    <popUpButtonCell key="cell" type="disclosure" bezelStyle="roundedDisclosure" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" arrowPosition="noArrow" preferredEdge="maxX" autoenablesItems="NO" altersStateOfSelectedItem="NO" id="StS-N4-e7g">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" autoenablesItems="NO" id="dy6-Rc-kk0">
+                            <items>
+                                <menuItem title="Item 1" id="5kh-nk-nk0"/>
+                                <menuItem title="Item 2" id="gYj-zv-hPu"/>
+                                <menuItem title="Item 3" id="qs0-tJ-ATT"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                </popUpButton>
+            </subviews>
+            <point key="canvasLocation" x="234" y="204.5"/>
+        </customView>
+    </objects>
+</document>

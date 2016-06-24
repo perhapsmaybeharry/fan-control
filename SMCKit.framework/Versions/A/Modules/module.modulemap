@@ -1,0 +1,10 @@
+framework module SMCKit {
+  umbrella header "SMCKit.h"
+
+  export *
+  module * { export * }
+}
+
+module SMCKit.Swift {
+    header "SMCKit-Swift.h"
+}
