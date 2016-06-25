@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			
 			updateMenubarItem()
 		}
-		// Initialise the timer that updates the menubar every three seconds
+		// Initialise the timer that updates the menubar every \(refreshRate) seconds. By default this is 3.0s.
 		NSTimer.scheduledTimerWithTimeInterval(refreshRate, target: self, selector: #selector(updateMenubarItem), userInfo: nil, repeats: true)
 		
 		// Initialise the NSPopover to use the view controller MenuBarPopover
@@ -65,6 +65,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //		if !NSFileManager().fileExistsAtPath("\(NSBundle.mainBundle().resourcePath)/pst") {do {try String().writeToFile("\(NSBundle.mainBundle().resourcePath!)/pst", atomically: false, encoding: NSUTF8StringEncoding)} catch let err as NSError {print("\n\(err.localizedDescription)")}}
 		
 		print()
+	}
+	
+	func applicationWillTerminate(notification: NSNotification) {
+		// reset fan speed to automatic
+		do {
+			try SMCKit.open()
+			for i in try 0..<SMCKit.fanCount() {try SMCKit.fanSetMinSpeed(i, speed: minSpeed)}
+			SMCKit.close()
+		} catch SMCKit.Error.NotPrivileged {print("The application must be invoked with `sudo` to function correctly")} catch let err as NSError {print(err.localizedDescription)}
+		
+		print("goodbye world")
 	}
 	
 	// Functions that handle the popover view.

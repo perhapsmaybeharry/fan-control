@@ -11,7 +11,6 @@
 		4A2E0BD41D1CEB2F0007EC21 /* SMCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2E0BCF1D1CEAD50007EC21 /* SMCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A2E0BDD1D1CEBCC0007EC21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E0BD61D1CEBCC0007EC21 /* AppDelegate.swift */; };
 		4A2E0BDE1D1CEBCC0007EC21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2E0BD71D1CEBCC0007EC21 /* Assets.xcassets */; };
-		4A2E0BDF1D1CEBCC0007EC21 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 4A2E0BD81D1CEBCC0007EC21 /* Base.lproj */; };
 		4A2E0BE01D1CEBCC0007EC21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2E0BD91D1CEBCC0007EC21 /* Main.storyboard */; };
 		4A2E0BE11D1CEBCC0007EC21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E0BDA1D1CEBCC0007EC21 /* ViewController.swift */; };
 		4A2E0BE21D1CEBCC0007EC21 /* MenuBarPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E0BDB1D1CEBCC0007EC21 /* MenuBarPopover.swift */; };
@@ -37,7 +36,6 @@
 		4A2E0BCF1D1CEAD50007EC21 /* SMCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMCKit.framework; sourceTree = "<group>"; };
 		4A2E0BD61D1CEBCC0007EC21 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "fan-control/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
 		4A2E0BD71D1CEBCC0007EC21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "fan-control/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
-		4A2E0BD81D1CEBCC0007EC21 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = "fan-control/Base.lproj"; sourceTree = SOURCE_ROOT; };
 		4A2E0BD91D1CEBCC0007EC21 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "fan-control/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		4A2E0BDA1D1CEBCC0007EC21 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "fan-control/ViewController.swift"; sourceTree = SOURCE_ROOT; };
 		4A2E0BDB1D1CEBCC0007EC21 /* MenuBarPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuBarPopover.swift; path = "fan-control/MenuBarPopover.swift"; sourceTree = SOURCE_ROOT; };
@@ -82,7 +80,6 @@
 				4A2E0BDC1D1CEBCC0007EC21 /* MenuBarPopover.xib */,
 				4A2E0BE41D1CEBD70007EC21 /* Info.plist */,
 				4A2E0BD71D1CEBCC0007EC21 /* Assets.xcassets */,
-				4A2E0BD81D1CEBCC0007EC21 /* Base.lproj */,
 				4A2E0BDA1D1CEBCC0007EC21 /* ViewController.swift */,
 				4A2E0BD91D1CEBCC0007EC21 /* Main.storyboard */,
 			);
@@ -151,7 +148,6 @@
 			files = (
 				4A2E0BE31D1CEBCC0007EC21 /* MenuBarPopover.xib in Resources */,
 				4A2E0BE01D1CEBCC0007EC21 /* Main.storyboard in Resources */,
-				4A2E0BDF1D1CEBCC0007EC21 /* Base.lproj in Resources */,
 				4A2E0BDE1D1CEBCC0007EC21 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

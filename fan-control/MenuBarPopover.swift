@@ -17,7 +17,7 @@ class MenuBarPopover: NSViewController {
 	@IBOutlet var textfield: NSTextField!
 	@IBOutlet var moreOptions: NSButton!
 	
-	let optionsMenu = NSMenu()/*, presetSubMenu = NSMenu()*/
+	let optionsMenu = NSMenu(), presetSubMenu = NSMenu()
 	override func viewDidAppear() {
 		// update slider min-max values
 		slider.minValue = Double(minSpeed)
@@ -36,14 +36,12 @@ class MenuBarPopover: NSViewController {
 		optionsMenu.addItemWithTitle("Display Temperature", action: #selector(commandTemp), keyEquivalent: "t")?.state = NSOnState
 		// allow changing of sensor used for temperature?
 		optionsMenu.addItem(NSMenuItem.separatorItem())
-//		optionsMenu.addItemWithTitle("Presets", action: nil, keyEquivalent: "")
-//		// set up presets submenu
-//		presetSubMenu.removeAllItems()
-//		loadPresets()
-//		presetSubMenu.addItem(NSMenuItem.separatorItem())
-//		presetSubMenu.addItemWithTitle("Save Current Settings", action: #selector(writePreset), keyEquivalent: "")
-//		optionsMenu.setSubmenu(presetSubMenu, forItem: optionsMenu.itemWithTitle("Presets")!)
-//		optionsMenu.addItem(NSMenuItem.separatorItem())
+		optionsMenu.addItemWithTitle("Presets", action: nil, keyEquivalent: "")
+		// set up presets submenu
+		presetSubMenu.autoenablesItems = false
+		loadPresets()
+		optionsMenu.setSubmenu(presetSubMenu, forItem: optionsMenu.itemWithTitle("Presets")!)
+		optionsMenu.addItem(NSMenuItem.separatorItem())
 		optionsMenu.addItemWithTitle("Use Fahrenheit", action: #selector(commandToggleUnit), keyEquivalent: "u")
 		optionsMenu.addItem(NSMenuItem.separatorItem())
 		optionsMenu.addItemWithTitle("Auto Speed", action: #selector(commandAutoSpeed), keyEquivalent: "=")
@@ -70,10 +68,44 @@ class MenuBarPopover: NSViewController {
 //		loadPresets()
 //	}
 	
+	// another try at presets
+	func writePreset() {
+		// procedure: check if file exists, if not {create}, then check if duplicate, then write
+		if !NSFileManager().fileExistsAtPath("\(NSBundle.mainBundle().resourcePath!)/pst") {print("presets:       creating file"); NSFileManager().createFileAtPath("\(NSBundle.mainBundle().resourcePath!)/pst", contents: NSData(), attributes: nil)}
+		do {if try String(contentsOfFile: "\(NSBundle.mainBundle().resourcePath!)/pst").containsString("\(userSetSpeed)") {print("presets:       \(userSetSpeed) rpm already exists"); return}} catch let err as NSError {print(err.localizedDescription)}
+		print("presets:       saving \(userSetSpeed) rpm")
+		do {try String("\(try String(contentsOfFile: "\(NSBundle.mainBundle().resourcePath!)/pst"))\(userSetSpeed)][").writeToFile("\(NSBundle.mainBundle().resourcePath!)/pst", atomically: false, encoding: NSUTF8StringEncoding)} catch let err as NSError {print(err.localizedDescription)}
+		loadPresets()
+	}
+	func loadPresets() {
+		// procedure: clear and load presets one by one into the menu
+		presetSubMenu.removeAllItems()
+		do {let presets = try String(contentsOfFile: "\(NSBundle.mainBundle().resourcePath!)/pst").componentsSeparatedByString("][").dropLast()
+			for preset in presets {
+				print("presets:       loading preset \(preset) rpm")
+				presetSubMenu.addItemWithTitle("\(preset) RPM", action: #selector(setToPreset(_:)), keyEquivalent: "")
+			}} catch let err as NSError {print(err.localizedDescription)}
+		presetSubMenu.addItem(NSMenuItem.separatorItem())
+		presetSubMenu.addItemWithTitle("Save Current Settings", action: #selector(writePreset), keyEquivalent: "")
+		presetSubMenu.addItemWithTitle("Delete Current Preset", action: #selector(deletePreset), keyEquivalent: "")
+	}
+	func setToPreset(sender: NSMenuItem) {
+		let newRPM = Int(sender.title.componentsSeparatedByString(" ")[0])!
+		print("presets:       using preset \(newRPM)")
+		slider.integerValue = newRPM
+		textfield.stringValue = "\(newRPM)"
+		setTargetFanSpeed(newRPM)
+		for i in 0..<presetSubMenu.itemArray.count {presetSubMenu.itemAtIndex(i)!.state = NSOffState}
+		sender.state = NSOnState
+	}
+	func deletePreset() {for i in presetSubMenu.itemArray {if i.state == NSOnState {presetSubMenu.removeItem(i)}}}
+	
 	// Updates the UI
 	@IBAction func sliderDidChange(sender: AnyObject) {
 		textfield.stringValue = String(slider.integerValue)
 		setTargetFanSpeed(slider.integerValue)
+		// no longer on preset mode!
+		for i in 0..<presetSubMenu.itemArray.count {presetSubMenu.itemAtIndex(i)!.state = NSOffState}
 	}
 	@IBAction func textfieldDidFinishEditing(sender: AnyObject) {
 		// allows quitting
@@ -82,7 +114,7 @@ class MenuBarPopover: NSViewController {
 		// sets value to either extreme end depending on which end it falls towards
 		if textfield.doubleValue > slider.maxValue || textfield.doubleValue < slider.minValue {
 			print("provided:      \(textfield.stringValue)")
-			print("assuming:      \(textfield.doubleValue > slider.maxValue ? Int(slider.maxValue) : Int(slider.minValue))")
+//			print("assuming:      \(textfield.doubleValue > slider.maxValue ? Int(slider.maxValue) : Int(slider.minValue))")
 			textfield.stringValue = String(textfield.doubleValue > slider.maxValue ? Int(slider.maxValue) : Int(slider.minValue))
 		}
 		
@@ -90,6 +122,8 @@ class MenuBarPopover: NSViewController {
 		setTargetFanSpeed(slider.integerValue)
 	}
 	func textfieldDidChangeText() {
+		// no longer on preset mode!
+		for i in 0..<presetSubMenu.itemArray.count {presetSubMenu.itemAtIndex(i)!.state = NSOffState}
 		// processes commands:
 		// - quit (self-explanatory)
 		// - rpm (display fan rpm)
@@ -116,7 +150,7 @@ class MenuBarPopover: NSViewController {
 	
 	// and thus begins the commands
 	func commandWasCalled() {textfield.stringValue = "\(userSetSpeed)"; updateMenubarItem()}
-	func commandQuit() {print("goodbye world"); NSApp.terminate(self)}
+	func commandQuit() {NSApp.terminate(self)}
 	func commandRPM() {displayRPM = displayRPM ? false : true; print("display rpm:   \(displayRPM)"); moreOptions.menu?.itemAtIndex(0)?.state = displayRPM ? NSOnState : NSOffState; commandWasCalled()}
 	func commandTemp() {displayTemp = displayTemp ? false : true; print("display temp:  \(displayTemp)"); moreOptions.menu?.itemAtIndex(1)?.state = displayTemp ? NSOnState : NSOffState;  commandWasCalled()}
 //	func commandCelsius() {celsius = true; print("unit:          celsius"); moreOptions.menu?.itemAtIndex(3)?.state = celsius ? NSOnState : NSOffState; commandWasCalled()}
