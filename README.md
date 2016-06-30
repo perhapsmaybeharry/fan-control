@@ -42,3 +42,4 @@ Features that will be added soon (hopefully):
   - [x] GUI menu for options
   - [x] presets!
   - [ ] thermal sensor choice
+  - [ ] keyboard shortcut for cycling presets
