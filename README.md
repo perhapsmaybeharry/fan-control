@@ -16,6 +16,7 @@ It's very similar to [smcFanControl](https://github.com/hholtmann/smcFanControl)
   - textfield for even greater RPM precision
   - menu shortcuts for full and return-to-automatic speeds
   - keyboard shortcut integration once application is in focus
+  - presets that allow you to quickly go to a specific fan speed, right from the menu
 
 ---
 
@@ -39,5 +40,6 @@ The application must be run within an AppleScript wrapper that allows it to run 
 Features that will be added soon (hopefully):
   - [x] runtime configurability for behavior (options)
   - [x] GUI menu for options
-  - [ ] presets!
+  - [x] presets!
   - [ ] thermal sensor choice
+  - [ ] keyboard shortcut for cycling presets
