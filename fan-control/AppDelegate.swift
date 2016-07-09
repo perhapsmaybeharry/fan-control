@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		if let button = menuBarItem.button {
 //			button.image = NSImage(named: "fan")
 			button.action = #selector(togglePopover(_:))
-			
+			menuBarItem.highlightMode = true
 			updateMenubarItem()
 		}
 		// Initialise the timer that updates the menubar every \(refreshRate) seconds. By default this is 3.0s.
@@ -62,7 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		} catch let err as NSError {print(err.localizedDescription);}
 		
 //		// check for preset file, and if non-existent, create
-//		if !NSFileManager().fileExistsAtPath("\(NSBundle.mainBundle().resourcePath)/pst") {do {try String().writeToFile("\(NSBundle.mainBundle().resourcePath!)/pst", atomically: false, encoding: NSUTF8StringEncoding)} catch let err as NSError {print("\n\(err.localizedDescription)")}}
+		if !NSFileManager().fileExistsAtPath("\(NSBundle.mainBundle().resourcePath)/pst") {do {try String().writeToFile("\(NSBundle.mainBundle().resourcePath!)/pst", atomically: false, encoding: NSUTF8StringEncoding)} catch let err as NSError {print("\n\(err.localizedDescription)")}}
 		
 		print()
 	}
@@ -93,7 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			if displayRPM {menuBarItem.button!.title.appendContentsOf("\(try SMCKit.fanCurrentSpeed(0)) rpm")}
 			SMCKit.close()
 		} catch let err as NSError {print(err.localizedDescription)}
-		menuBarItem.button!.font = NSFont(name: "Menu Bar", size: 24)
+		menuBarItem.button!.font = NSFont(name: "Menu Bar", size: CGFloat(14.0))
 	}
 }
 
